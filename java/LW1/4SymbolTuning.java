@@ -37,8 +37,10 @@ public class SymbolTuning {
      */
     public static void main(String[] args) {
                 
+        SymbolTuning test = new SymbolTuning();
+        
         // Traitement des arguments
-        args = parsingArgs(args);
+        args = test.parsingArgs(args);
         
         System.out.println("\nParamètres d'entrée : ");
         displayArray(args);
@@ -183,7 +185,7 @@ public class SymbolTuning {
     * @param args l'array entré par l'utilisateur
     * @return la liste des nombres à compter dans un array
     */
-    public static String[] parsingArgs(String[] args){
+    public String[] parsingArgs(String[] args){
         
         List<String> listArgs = new ArrayList<>();
         
@@ -201,8 +203,9 @@ public class SymbolTuning {
             if (argType.equals("-v") && !s.equals("-v")){
                 listArgs.add(s);
             }
+            // Le symbol de graphique
             else if (argType.equals("-s") && !s.equals("-s")){
-                //this.symbolChar = s;
+                this.symbolChar = s;
                 System.out.println("Le symbol choisi est : '" + s + "'");
                 argType = "";
             }
