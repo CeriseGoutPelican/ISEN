@@ -51,14 +51,15 @@ class GravityCalculator {
         
         firstTest.calculateFinalPosition();
         
-        System.out.println(firstTest.finalPosition);
+        System.out.println(firstTest.getFinalPosition());
     }
     
     /**
      * Cette méthode permet de calculer la position finale d'une valeur
      */
     public void calculateFinalPosition() {
-        finalPosition = 0.5 * GRAVITY * (fallingTime*fallingTime) + initialVelocity * fallingTime + initialPosition;
+        this.finalPosition = 0.5 * GRAVITY * (this.getFallingTime()*this.getFallingTime()) 
+                + this.getInitialVelocity() * this.getFallingTime() + this.getFinalPosition();
     }
     
 }
