@@ -13,7 +13,7 @@ package labwork1b;
 
 /**
  * Cette classe répond au premier exercice du LW1 bis
- *      1- EXERCICE 1 : GRAVITY CALCULATOR
+ *      2- EXERCICE 2 : MARATHON DE LILLE
  */
 class Exercice2 {
 
@@ -38,7 +38,12 @@ class Exercice2 {
                
     }
     
-
+    /**
+     * Méthode permettant de retourner le coureur le plus rapide (plus petit
+     * temps en minutes) 
+     * 
+     * @return minIndex l'index du plus petit temps
+     */
     public int fastestRunner(){
         
         int minIndex = 0;
@@ -54,6 +59,12 @@ class Exercice2 {
         
     }
     
+    /**
+     * Méthode permettant de retourner le couleur le plus lent (plus grand temps
+     * en minutes)
+     * 
+     * @return maxIndex l'index du plus grand temps
+     */
     public int slowestRunner(){
         
         int maxIndex = 0;
@@ -69,6 +80,12 @@ class Exercice2 {
         
     }
     
+    /**
+     * Méthode permettant de retourner une liste contenant les trois 
+     * meilleurs temps sous forme d'une liste.
+     * 
+     * @return retour un tableau int contenant les trois meilleurs index
+     */
     public int[] top3Runners(){
         
         int indexMin1 = 0;
@@ -108,5 +125,6 @@ class Exercice2 {
         return retour;
         
     }
-       
+    
+    
 }
