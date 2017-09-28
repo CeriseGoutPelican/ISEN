@@ -72,10 +72,15 @@ public class ChemicalElement extends LabWork2{
         ChemicalElement S  = new ChemicalElement(16, "Soufre",    "S");
         ChemicalElement Cl = new ChemicalElement(17, "Chlore",    "Cl");
         ChemicalElement Ar = new ChemicalElement(18, "Argon",     "Ar");
+        ChemicalElement K = new ChemicalElement(19,  "Potasium",   "K");
+        ChemicalElement Zn = new ChemicalElement(30, "Zinc",      "Zn");
+        ChemicalElement Ga = new ChemicalElement(31, "Gallium",   "Ga");
        
         System.out.println("");
-        Li.displayElement();
-        Ar.displayElement();
+        H.displayElement();
+        K.displayElement();
+        Zn.displayElement();
+        Ga.displayElement();
     }
     
     /**
@@ -155,7 +160,7 @@ public class ChemicalElement extends LabWork2{
      */
     public String categoryName(){
         if (this.alkaliMetals()){
-            return "Alkali";
+            return "Alcalin";
         } else if (this.transitionMetals()){
             return "métal de transition";
         } else if (this.postTransitionMetals()){
