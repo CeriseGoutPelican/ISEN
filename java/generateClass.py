@@ -48,7 +48,7 @@ if len(extend) > 0:
     sys.stdout.write("        super(")
     for i in extendedVar:
         sys.stdout.write(i[1] + (", " if i[1] != extendedVar[-1][1] else ""))
-    print ")\n"
+    print ");\n"
     
 for i in variables:
     print "        this." + i[1] + " = " + i[1] + ";"
