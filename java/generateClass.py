@@ -23,11 +23,11 @@ print ""
 
 # Definition des variables
 for i in variables:
-    print "    private" + i[0] + " " + i[1] + ";"
+    print "    private " + i[0] + " " + i[1] + ";"
     
 # Constructeur
 print("\n    // CONSTRUCTEURS")
-sys.stdout.write('    public  ' + className + "(")
+sys.stdout.write('    public ' + className + "(")
 for i in variables:
     sys.stdout.write(i[0] + " " + i[1] + (", " if i[1] != variables[-1][1] else ""))
 sys.stdout.write('){\n')
