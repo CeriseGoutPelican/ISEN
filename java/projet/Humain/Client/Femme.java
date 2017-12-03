@@ -1,5 +1,6 @@
 package simulateurzytho.Humain.Client;
 
+import simulateurzytho.Boisson;
 import simulateurzytho.Humain.Client.Client;
 
 /**
@@ -68,7 +69,7 @@ public class Femme extends Client{
      * ============
      * @since 1.0
      */
-    public Femme(String prenom, String surnom, float argent, float popularite, String cri, String boissonFavorite, String boissonFavoriteBis, float alcoolemie, float regularite, float totalDepenses, String bijoux, String qualificatifServeur){
+    public Femme(String prenom, String surnom, float argent, float popularite, String cri, Boisson boissonFavorite, Boisson boissonFavoriteBis, float alcoolemie, float regularite, float totalDepenses, String bijoux, String qualificatifServeur){
         super(prenom, surnom, argent, popularite, cri, boissonFavorite, boissonFavoriteBis, alcoolemie, regularite, totalDepenses);
 
         this.bijoux = bijoux;

@@ -1,6 +1,7 @@
 package simulateurzytho.Humain.Client;
 
 import simulateurzytho.AffichageGraphique;
+import simulateurzytho.Boisson;
 import simulateurzytho.Commande;
 import simulateurzytho.SimulateurZytho;
 
@@ -23,7 +24,7 @@ import simulateurzytho.SimulateurZytho;
 public class Patron extends Homme{
     
     
-    public Patron(String prenom, String surnom, float argent, float popularite, String cri, String boissonFavorite, String boissonFavoriteBis, float alcoolemie, float regularite, float totalDepenses, String couleurTshirt, String qualificatifServeur) {
+    public Patron(String prenom, String surnom, float argent, float popularite, String cri, Boisson boissonFavorite, Boisson boissonFavoriteBis, float alcoolemie, float regularite, float totalDepenses, String couleurTshirt, String qualificatifServeur) {
         super(prenom, surnom, argent, popularite, cri, boissonFavorite, boissonFavoriteBis, alcoolemie, regularite, totalDepenses, couleurTshirt, qualificatifServeur);
     }
     

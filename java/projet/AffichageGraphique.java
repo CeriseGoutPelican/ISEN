@@ -10,8 +10,15 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 import simulateurzytho.Humain.Barman;
+import simulateurzytho.Humain.Client.Client;
+import simulateurzytho.Humain.Client.Femme;
+import simulateurzytho.Humain.Client.Homme;
 import simulateurzytho.Humain.Client.Patron;
 import simulateurzytho.Humain.Fournisseur;
+import simulateurzytho.Humain.Humain;
+import simulateurzytho.Humain.Serveur.Serveur;
+import simulateurzytho.Humain.Serveur.ServeurFemme;
+import simulateurzytho.Humain.Serveur.ServeurHomme;
 
 /**
  * CLASSE AFFICHAGEGRAPHIQUE
@@ -238,7 +245,7 @@ public class AffichageGraphique {
         // Affichage des statistiques si besoin
         float[] statistiques = SimulateurZytho.getStatistiques();
         if(statistiques.length > 0){
-            System.out.printf("Argent dépensé : " + YELLOW + floatToString(statistiques[0], "000") + "€" + RESET + " - ");
+            System.out.printf("Argent caisse : " + YELLOW + floatToString(statistiques[0], "000") + "€" + RESET + " - ");
             System.out.printf("Argent disponible : " + YELLOW + floatToString(statistiques[1], "000") + "€" + RESET + " - ");
             System.out.printf("Nombre de clients : " + YELLOW + floatToString(statistiques[2], "000") + RESET + " - ");
             System.out.printf("Nombre de serveurs : " + YELLOW + floatToString(statistiques[3], "000") + RESET + " - ");
@@ -378,6 +385,24 @@ public class AffichageGraphique {
             case "payementCommande":
                 Patron.payementCommande(arguments);
             break;
+            case "affichagePersonnel":
+                affichagePersonnel();
+            break;
+            case "affichageClients":
+                affichageClients();
+            break;
+            case "generationPersonnages":
+                Humain.generationPersonnages(arguments);
+            break;
+            case "creationPersonnage":
+                Humain.creationPersonnage(arguments);
+            break;
+            case "fermerProgramme":
+                System.exit(0);
+            break;
+            case "erreur":
+                System.out.println(RED + arguments[0] + RESET);
+            break;
         }
         
     }
@@ -436,7 +461,7 @@ public class AffichageGraphique {
         
         System.out.println("");
         
-        // Création du tableau des fournisseurs
+        // Création du tableau des barmen
         List barmen = SimulateurZytho.listeBarmen;
         TableList tl_3 = new TableList(3, "#", "Nom du barman", "Console");
         Barman forceBarman;
@@ -497,6 +522,183 @@ public class AffichageGraphique {
         System.out.println(PURPLE +"\nPayement commande : 'payement nbr' " + RESET + " / " + PURPLE + "Livraison commande : 'livraison nbr'" + RESET);
         
     }  
+    
+    /**
+     * METHODE AFFICHAGE_PERSONNEL
+     * ===========================
+     * Cette méthode permet d'afficher l'intégralité du personnel
+     * 
+     * ENTREES
+     * =======
+     * Aucune entrée
+     * 
+     * SORTIES
+     * =======
+     * Aucune sortie
+     * 
+     * INFORMATIONS
+     * ============
+     * @since 1.0
+     */
+    public static void affichagePersonnel(){
+                
+        System.out.println(YELLOW + "PATRON (1)" + RESET);
+        // Création du tableau du patron
+        TableList tl = new TableList(12, "Nom", "Surnom", "Argent", "Pop.", "Cri", "Boisson 1", "Boisson 2", "Alc.", "Regt.", "Depenses", "T-shirt", "Qualif.");
+            tl.addRow(
+                    SimulateurZytho.patron.getPrenom(),
+                    SimulateurZytho.patron.getSurnom(),
+                    floatToString(SimulateurZytho.patron.getArgent(), "0.00"+"€"),
+                    floatToString(SimulateurZytho.patron.getPopularite(), "0"),
+                    SimulateurZytho.patron.getCri().substring(0, Math.min(SimulateurZytho.patron.getCri().length(), 7))+"...",
+                    SimulateurZytho.patron.getBoissonfavorite().getNom(),
+                    SimulateurZytho.patron.getBoissonfavorite().getNom(),
+                    floatToString(SimulateurZytho.patron.getAlcoolemie(), "00"),
+                    floatToString(SimulateurZytho.patron.getRegularite(), "00"),
+                    floatToString(SimulateurZytho.patron.getTotalDepenses(), "0.00"+"€"),
+                    SimulateurZytho.patron.getCouleurtshirt(),
+                    SimulateurZytho.patron.getQualificatifserveur());
+        tl.print();
+        
+       
+        // Création du tableau des barmen
+        List barmen = SimulateurZytho.listeBarmen;
+        System.out.println(YELLOW + "\nBARMEN ("+barmen.size()+")" + RESET);
+        TableList tl_2 = new TableList(7, "#", "Nom", "Surnom", "Argent", "Pop.", "Cri", "Fin phrase");
+        Barman forceBarman;
+        int i=0;for (Object barman : barmen){
+            forceBarman = (Barman) barman;
+            tl_2.addRow(
+                    floatToString(i, "00"),
+                    forceBarman.getPrenom(),
+                    forceBarman.getSurnom(),
+                    floatToString(forceBarman.getArgent(), "0.00"+"€"),
+                    floatToString(forceBarman.getPopularite(), "0"),
+                    forceBarman.getCri().substring(0, Math.min(forceBarman.getCri().length(), 10))+"...",
+                    forceBarman.getFinPhrase());
+        i++;}
+        tl_2.print();
+        
+        // Création du tableau des serveurs
+        List serveurs = SimulateurZytho.listeServeurs;
+        System.out.println(YELLOW + "\nSERVEUR.EUSE.S ("+serveurs.size()+")" + RESET);
+        TableList tl_3 = new TableList(7, "#", "Nom", "Surnom", "Argent", "Pop.", "Cri", "[B]iceps/[C]harme");
+        ServeurHomme forceServeur;
+        ServeurFemme forceServeuse;
+        i=0;for (Object serveur : serveurs){
+            if (serveur instanceof ServeurHomme){
+                forceServeur = (ServeurHomme) serveur;
+                tl_3.addRow(
+                        floatToString(i, "00"),
+                        forceServeur.getPrenom(),
+                        forceServeur.getSurnom(),
+                        floatToString(forceServeur.getArgent(), "0.00"+"€"),
+                        floatToString(forceServeur.getPopularite(), "0"),
+                        forceServeur.getCri().substring(0, Math.min(forceServeur.getCri().length(), 10))+"...",
+                        forceServeur.getTailleBiceps() + " [B]");
+            } else {
+                forceServeuse = (ServeurFemme) serveur;
+                tl_3.addRow(
+                        floatToString(i, "00"),
+                        forceServeuse.getPrenom(),
+                        forceServeuse.getSurnom(),
+                        floatToString(forceServeuse.getArgent(), "0.00"+"€"),
+                        floatToString(forceServeuse.getPopularite(), "0"),
+                        forceServeuse.getCri().substring(0, Math.min(forceServeuse.getCri().length(), 10))+"...",
+                        forceServeuse.getCoefficientCharme()+" [C]");
+            }
+        i++;}
+        tl_3.print();
+            
+        // Création du tableau des fournisseurs
+        List fournisseurs = SimulateurZytho.listeFournisseurs;
+        System.out.println(YELLOW + "\nFOURNISSEURS ("+fournisseurs.size()+")" + RESET);
+        TableList tl_4 = new TableList(6, "#", "Nom", "Surnom", "Argent", "Pop.", "Cri");
+        Fournisseur forceFournisseur;
+        i=0;for (Object fournisseur : fournisseurs){
+            forceFournisseur = (Fournisseur) fournisseur;
+            tl_4.addRow(
+                    floatToString(i, "00"),
+                    forceFournisseur.getPrenom(),
+                    forceFournisseur.getSurnom(),
+                    floatToString(forceFournisseur.getArgent(), "0.00"+"€"),
+                    floatToString(forceFournisseur.getPopularite(), "0"),
+                    forceFournisseur.getCri().substring(0, Math.min(forceFournisseur.getCri().length(), 10))+"...");
+        i++;}
+        tl_4.print();  
+        
+        System.out.println(PURPLE +"\nGénération de N serveurs : 'generationPerso serveur N' " + RESET + " / " + PURPLE + "Création d'un serveur : 'creationPerso serveur'" + RESET);
+        System.out.println(PURPLE +"Peuvent être passé en argument : client, cliente, serveur, serveuse, patron, barman, fournisseur (Un seul patron sera généré)" + RESET);
+       
+    }
+    
+
+    
+    /**
+     * METHODE AFFICHAGE_CLIENTS
+     * =========================
+     * Cette méthode permet d'afficher la liste des clients
+     * 
+     * ENTREES
+     * =======
+     * Aucune entrée
+     * 
+     * SORTIES
+     * =======
+     * Aucune sortie
+     * 
+     * INFORMATIONS
+     * ============
+     * @since 1.0
+     */
+    public static void affichageClients(){
+        
+        // Création du tableau 
+        List clients = SimulateurZytho.listeClients;
+        System.out.println(YELLOW + "CLIENT.E.S ("+clients.size()+")" + RESET);
+        TableList tl = new TableList(13, "#", "Nom", "Surnom", "Argent", "Pop.", "Cri", "Boisson 1", "Boisson 2", "Alc.", "Regt.", "Depenses", "[T]-shirt/[B]ijoux", "Qual.");
+        Homme forceClient;
+        Femme forceCliente;
+        int i=0;for (Object client : clients){
+            if (client instanceof Homme){
+                forceClient = (Homme) client;
+                tl.addRow(
+                        floatToString(i, "00"),
+                        forceClient.getPrenom(),
+                        forceClient.getSurnom(),
+                        floatToString(forceClient.getArgent(), "0.00"+"€"),
+                        floatToString(forceClient.getPopularite(), "0"),
+                        forceClient.getCri().substring(0, Math.min(forceClient.getCri().length(), 7))+"...",
+                        forceClient.getBoissonfavorite().getNom(),
+                        forceClient.getBoissonfavoritebis().getNom(),
+                        floatToString(forceClient.getAlcoolemie(), "00"),
+                        floatToString(forceClient.getRegularite(), "00"),
+                        floatToString(forceClient.getTotalDepenses(), "0.00"+"€"),
+                        forceClient.getCouleurtshirt()+" [T]",
+                        forceClient.getQualificatifserveur());
+            } else {
+                forceCliente = (Femme) client;
+                tl.addRow(
+                        floatToString(i, "00"),
+                        forceCliente.getPrenom(),
+                        forceCliente.getSurnom(),
+                        floatToString(forceCliente.getArgent(), "0.00"+"€"),
+                        floatToString(forceCliente.getPopularite(), "0"),
+                        forceCliente.getCri().substring(0, Math.min(forceCliente.getCri().length(), 7))+"...",
+                        forceCliente.getBoissonfavorite().getNom(),
+                        forceCliente.getBoissonfavorite().getNom(),
+                        floatToString(forceCliente.getAlcoolemie(), "00"),
+                        floatToString(forceCliente.getRegularite(), "00"),
+                        floatToString(forceCliente.getTotalDepenses(), "0.00"+"€"),
+                        forceCliente.getBijoux()+" [B]",
+                        forceCliente.getQualificatifserveur());
+            }
+        i++;}
+        tl.print();
+        
+        System.out.println(PURPLE +"\nGénération de N clients : 'generationPerso client N' " + RESET + " / " + PURPLE + "Création d'un client : 'creationPerso client'" + RESET);
+        System.out.println(PURPLE +"Peuvent être passé en argument : client, cliente, serveur, serveuse, patron, barman, fournisseur (Un seul patron sera généré)" + RESET);
+    }      
     
     /**
      * METHODE SLUG

@@ -1,0 +1,14 @@
+bleu
+rouge
+vert
+violet
+indigo
+turquoise
+vermillon
+pourpre
+marron
+orange
+rose
+corail
+gris
+kaki

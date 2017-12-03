@@ -1,9 +1,18 @@
 package simulateurzytho;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import simulateurzytho.Humain.Barman;
+import simulateurzytho.Humain.Client.Client;
+import simulateurzytho.Humain.Client.Patron;
 import simulateurzytho.Humain.Fournisseur;
+import simulateurzytho.Humain.Serveur.Serveur;
+import simulateurzytho.Humain.Serveur.ServeurFemme;
+import simulateurzytho.Humain.Serveur.ServeurHomme;
 
 /**
  * CLASSE SIMULATEUR_ZYTHO
@@ -70,6 +79,26 @@ public class SimulateurZytho {
     private static Interface CLIENTS;
     
     /**
+     * Génération de l'interface de génération aléatoire de personnages
+     */
+    private static Interface GENERATION_PERSO;
+    
+    /**
+     * Génération de l'interface de création d'un personnage
+     */
+    private static Interface CREATION_PERSO;
+    
+    /**
+     * Ferme le programme
+     */
+    private static Interface EXIT;
+    
+    /**
+     * Interface d'erreyr
+     */
+    public static Interface ERROR;
+    
+    /**
      * Liste de toutes les boissons à la carte
      */
     public static List<Boisson> listeBoissons = new ArrayList<>();
@@ -83,6 +112,21 @@ public class SimulateurZytho {
      * Liste de tous les fournisseurs
      */
     public static List<Fournisseur> listeFournisseurs = new ArrayList<>();
+    
+    /**
+     * Liste de tous les Clients
+     */
+    public static List<Object> listeClients = new ArrayList<>();
+    
+    /**
+     * Liste de tous les Serveurs
+     */
+    public static List<Object> listeServeurs = new ArrayList<>();
+    
+    /**
+     * Patron du bar
+     */
+    public static Patron patron;
     
     /**
      * Liste de toutes les commandes
@@ -154,18 +198,25 @@ public class SimulateurZytho {
         LIVRAISON_COMMANDE = new Interface("Livraison d'une commande", "livraison", "Livraison", null, "livraisonCommande", COMMANDES, null);
         PAYEMENT_COMMANDE  = new Interface("Payement d'une commande", "payement", "Payement", null, "payementCommande", COMMANDES, null);
         COMPTES            = new Interface("Affichage du compte en banque", "comptes", "Comptes", null, null, ACCUEIL, null);
-        PERSONNEL          = new Interface("Gestion du personnel", "personnel", "Gestion personnel", null, null, ACCUEIL, null);
-        CLIENTS            = new Interface("Gestion des clients présents dans le bar", "clients", "Liste clients", null, null, ACCUEIL, null);
+        PERSONNEL          = new Interface("Gestion du personnel", "personnel", "Liste du personnel", null, "affichagePersonnel", ACCUEIL, null);
+        CLIENTS            = new Interface("Gestion des clients", "clients", "Liste des clients", null, "affichageClients", ACCUEIL, null);
+        GENERATION_PERSO   = new Interface("Génération aléatoire d'un personnage", "generationPerso", "Génération de personnages", null, "generationPersonnages", ACCUEIL, null);
+        CREATION_PERSO     = new Interface("Création d'un personnage", "creationPerso", "Création de personnages", null, "creationPersonnage", ACCUEIL, null);
+        EXIT               = new Interface("Fermeture", "exit", "Fermer", null, "fermerProgramme", null, null);
+        ERROR              = new Interface("Erreur !", "exit", "Fermer", null, "erreur", null, null);
         
-        ACCUEIL.setEnfants(new Interface[]{STOCKS, COMPTES, PERSONNEL, CLIENTS});
-        STOCKS.setEnfants(new Interface[]{ACCUEIL, RENOUVELER, COMMANDES});
-        RENOUVELER.setEnfants(new Interface[]{STOCKS, COMMANDES});
-        COMMANDES.setEnfants(new Interface[]{STOCKS, PAYEMENT_COMMANDE, LIVRAISON_COMMANDE});
-        LIVRAISON_COMMANDE.setEnfants(new Interface[]{COMMANDES, STOCKS});
-        PAYEMENT_COMMANDE.setEnfants(new Interface[]{COMMANDES, STOCKS});
-        COMPTES.setEnfants(new Interface[]{ACCUEIL});
-        PERSONNEL.setEnfants(new Interface[]{ACCUEIL});
-        CLIENTS.setEnfants(new Interface[]{ACCUEIL});
+        ACCUEIL.setEnfants(new Interface[]{STOCKS, COMPTES, PERSONNEL, CLIENTS, EXIT});
+        STOCKS.setEnfants(new Interface[]{ACCUEIL, RENOUVELER, COMMANDES, EXIT});
+        RENOUVELER.setEnfants(new Interface[]{STOCKS, COMMANDES, EXIT});
+        COMMANDES.setEnfants(new Interface[]{STOCKS, PAYEMENT_COMMANDE, LIVRAISON_COMMANDE, EXIT});
+        LIVRAISON_COMMANDE.setEnfants(new Interface[]{COMMANDES, STOCKS, EXIT});
+        PAYEMENT_COMMANDE.setEnfants(new Interface[]{COMMANDES, STOCKS, EXIT});
+        COMPTES.setEnfants(new Interface[]{ACCUEIL, EXIT});
+        PERSONNEL.setEnfants(new Interface[]{ACCUEIL, GENERATION_PERSO, CREATION_PERSO, EXIT});
+        CLIENTS.setEnfants(new Interface[]{ACCUEIL, GENERATION_PERSO, CREATION_PERSO, EXIT});
+        GENERATION_PERSO.setEnfants(new Interface[]{CLIENTS, PERSONNEL, EXIT});
+        CREATION_PERSO.setEnfants(new Interface[]{CLIENTS, PERSONNEL, EXIT});
+        ERROR.setEnfants(new Interface[]{ACCUEIL, EXIT});
     } 
     
     /**
@@ -232,10 +283,15 @@ public class SimulateurZytho {
         listeFournisseurs.add(fournisseur1);
         
         // Liste serveur.euse.s
+        ServeurHomme serveur1 = new ServeurHomme("Charles", "Charly", 10, 15, "Allez Charlotte !", 10);
+        ServeurFemme serveur2 = new ServeurFemme("Charlotte", "Charlotte aux fraises", 10, 15, "Allez Charly !", 40);
+        listeServeurs.add(serveur1);
+        listeServeurs.add(serveur2);  
         
         // Patron
+        patron = new Patron("Corentin", "Coco", 50, 20, "ALLEZ LES DRAKK'ISEN !", listeBoissons.get(0), listeBoissons.get(1), 0, 100, 0, "Noir", "Mon beau");      
         
-        // A RETIRER !!!
+        // Juste une commande de départ pour tester
         Commande nouvelleCommande = new Commande(listeBarmen.get(0), listeFournisseurs.get(0), listeBoissons.get(0), 20, false, false);
         SimulateurZytho.listeCommandes.add(nouvelleCommande);
     }
@@ -260,10 +316,10 @@ public class SimulateurZytho {
     public static float[] getStatistiques() {  
         
         float[] statistiques = {
-            0,                                  // Argent dépensé
+            0,                                  // Argent caisse
             liquidites,                         // Argent disponible
-            0,                                  // Nombre de clients
-            0,                                  // Nombre de serveurs
+            listeClients.size(),                // Nombre de clients
+            listeServeurs.size(),               // Nombre de serveurs
             Boisson.getQuantiteStocks()};       // Stocks
         
         return statistiques;
@@ -311,5 +367,47 @@ public class SimulateurZytho {
     public static void setLiquidites(float modification) {  
         liquidites += modification;
     }
+    
+    /**
+     * METHODE SELECTION_ALEATOIRE
+     * ===========================
+     * Cette méthode permet de sélectionner de manière aléatoire un ligne
+     * d'un fichier texte et de la renvoyer sous forme d'une chaîne de 
+     * caractères
+     * 
+     * ENTREES
+     * =======
+     * @param nomFichier
+     *          Nom du document à récupérer de manière aléatoire
+     * 
+     * SORTIES
+     * =======
+     * @return La ligne sélectionnée aléatoirement
+     * 
+     * INFORMATIONS
+     * ============
+     * @since 1.0
+     */
+    public static String selectionAleatoire(String nomFichier){
+        // Essai d'ouverture du fichier
+        try (BufferedReader in = new BufferedReader(new FileReader("./src/simulateurzytho/files/rand/"+nomFichier+".txt"))) {
+            String ligne;
+            ArrayList<String> selection = new ArrayList<>();
+            // Affichage ligne par ligne
+            while((ligne = in.readLine()) != null)
+            {
+                selection.add(ligne);
+            }
+            Random rand = new Random();
+            int randomIndex = rand.nextInt(selection.size());
+            
+            return selection.get(randomIndex);
+        }
+        catch(IOException e)
+        {
+            System.out.println(AffichageGraphique.RED+"Impossible d'ouvrir le fichier './src/simulateurzytho/files/rand/"+nomFichier+".txt'"+AffichageGraphique.RESET);
+            return null;
+        }  
+    } 
     
 }

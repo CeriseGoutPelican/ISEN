@@ -1,5 +1,6 @@
 package simulateurzytho.Humain.Client;
 
+import simulateurzytho.Boisson;
 import simulateurzytho.Humain.Humain;
 
 /**
@@ -32,12 +33,12 @@ public class Client extends Humain{
     /**
      * La boisson favorite d'un client
      */
-    private final String boissonFavorite;
+    private final Boisson boissonFavorite;
     
     /**
      * La boisson favorite de secours d'un client (on ne sait jamais)
      */
-    private final String boissonFavoriteBis;
+    private final Boisson boissonFavoriteBis;
     
     /**
      * Le taux d'alcoolémie d'un client
@@ -86,7 +87,7 @@ public class Client extends Humain{
      * ============
      * @since 1.0
      */
-    public Client(String prenom, String surnom, float argent, float popularite, String cri, String boissonFavorite, String boissonFavoriteBis, float alcoolemie, float regularite, float totalDepenses){
+    public Client(String prenom, String surnom, float argent, float popularite, String cri, Boisson boissonFavorite, Boisson boissonFavoriteBis, float alcoolemie, float regularite, float totalDepenses){
         super(prenom, surnom, argent, popularite, cri);
 
         this.boissonFavorite = boissonFavorite;
@@ -113,7 +114,7 @@ public class Client extends Humain{
      * ============
      * @since 1.0
      */
-    public String getBoissonfavorite(){
+    public Boisson getBoissonfavorite(){
         return boissonFavorite;
     }
     
@@ -134,7 +135,7 @@ public class Client extends Humain{
      * ============
      * @since 1.0
      */
-    public String getBoissonfavoritebis(){
+    public Boisson getBoissonfavoritebis(){
         return boissonFavoriteBis;
     }
     

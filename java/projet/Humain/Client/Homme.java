@@ -1,6 +1,6 @@
 package simulateurzytho.Humain.Client;
 
-import simulateurzytho.Humain.Client.Client;
+import simulateurzytho.Boisson;
 
 /**
  * CLASSE HOMME
@@ -68,7 +68,7 @@ public class Homme extends Client{
      * ============
      * @since 1.0
      */
-    public Homme(String prenom, String surnom, float argent, float popularite, String cri, String boissonFavorite, String boissonFavoriteBis, float alcoolemie, float regularite, float totalDepenses, String couleurTshirt, String qualificatifServeur){
+    public Homme(String prenom, String surnom, float argent, float popularite, String cri, Boisson boissonFavorite, Boisson boissonFavoriteBis, float alcoolemie, float regularite, float totalDepenses, String couleurTshirt, String qualificatifServeur){
         super(prenom, surnom, argent, popularite, cri, boissonFavorite, boissonFavoriteBis, alcoolemie, regularite, totalDepenses);
 
         this.couleurTshirt = couleurTshirt;

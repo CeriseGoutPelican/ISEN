@@ -246,6 +246,36 @@ public class Boisson{
     }
     
     /**
+     * METHODE GET_LISTE_BOISSONS
+     * ==========================
+     * Retourne la liste des boissons sous forme 1- Boisson 1 2- Boisson 2...
+     * 
+     * ENTREES
+     * =======
+     * Aucune entrée
+     * 
+     * SORTIES
+     * =======
+     * @return la liste des boissons
+     * 
+     * INFORMATIONS
+     * ============
+     * @since 1.0
+     */    
+    public static String getListeBoisson(){
+        List boissons = SimulateurZytho.listeBoissons;
+        String listeBoissons = "";
+        
+        Boisson forceBoisson;
+        int i=0;for (Object boisson : boissons){
+            forceBoisson = (Boisson) boisson;
+            listeBoissons += i + "- " + forceBoisson.getNom() + " ";
+        i++;}
+        
+        return listeBoissons;
+    }
+    
+    /**
      * MUTATEUR SET_QUANTITE_DISPONIBLE
      * ================================
      * Permet de modifier le stock d'une boisson
