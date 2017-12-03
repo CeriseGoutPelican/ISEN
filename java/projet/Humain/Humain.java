@@ -1,7 +1,6 @@
 package simulateurzytho.Humain;
 
 import com.sun.xml.internal.ws.util.StringUtils;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 import simulateurzytho.AffichageGraphique;
@@ -10,10 +9,8 @@ import simulateurzytho.Humain.Client.Femme;
 import simulateurzytho.Humain.Client.Homme;
 import simulateurzytho.Humain.Client.Patron;
 import simulateurzytho.Humain.Serveur.ServeurHomme;
-import simulateurzytho.Interface;
+import simulateurzytho.Log;
 import simulateurzytho.SimulateurZytho;
-import static simulateurzytho.SimulateurZytho.listeBoissons;
-import static simulateurzytho.SimulateurZytho.patron;
 
 /**
  * CLASSE HUMAIN
@@ -251,7 +248,7 @@ public class Humain {
      * @since 1.0
      */    
     public void setArgent(float argent){
-        this.argent = argent;
+        this.argent += argent;
     }
     
     /**
@@ -273,7 +270,7 @@ public class Humain {
      * @since 1.0
      */ 
     public void setPopularite(float popularite){
-        this.popularite = popularite;
+        this.popularite += popularite;
     }
     
     /**
@@ -457,7 +454,7 @@ public class Humain {
                         int boisson1 = Integer.parseInt(input.nextLine());
                         if(boisson1 < 0 || boisson1 > SimulateurZytho.listeBoissons.size()){
                             AffichageGraphique.clearScreen();
-                            AffichageGraphique.affichageInterface(SimulateurZytho.ERROR, new String[]{"Le numéro de la bière indiqué n'est pas correct !"});
+                            AffichageGraphique.affichageInterface(SimulateurZytho.erreur, new String[]{"Le numéro de la bière indiqué n'est pas correct !"});
                         }
                         Boisson cBoisson1 = SimulateurZytho.listeBoissons.get((0 + (int)(Math.random() * SimulateurZytho.listeBoissons.size())));
                         // Génération d'une boisson favorite 2
@@ -465,7 +462,7 @@ public class Humain {
                         int boisson2 = Integer.parseInt(input.nextLine());
                         if(boisson2 < 0 || boisson2 > SimulateurZytho.listeBoissons.size()){
                             AffichageGraphique.clearScreen();
-                            AffichageGraphique.affichageInterface(SimulateurZytho.ERROR, new String[]{"Le numéro de la bière indiqué n'est pas correct !"});
+                            AffichageGraphique.affichageInterface(SimulateurZytho.erreur, new String[]{"Le numéro de la bière indiqué n'est pas correct !"});
                         }
                         Boisson cBoisson2 = SimulateurZytho.listeBoissons.get((0 + (int)(Math.random() * SimulateurZytho.listeBoissons.size())));
                         // Génération d'un taux d'alcoolemie
@@ -534,6 +531,77 @@ public class Humain {
         }
          
     } 
+    
+    /**
+     * METHODE PARLER
+     * ==============
+     * Cette méthode permet à un humain de parler à quelqu'un d'autre
+     * 
+     * ENTREES
+     * =======
+     * @param autreHumain 
+     *          La personne à qui le personnage parle
+     * 
+     * SORTIES
+     * =======
+     * @return La phrase de présentation
+     * 
+     * INFORMATIONS
+     * ============
+     * @since 1.0
+     */
+    public String parler(Humain autreHumain){
+        // Le personnage gagne 1% de la popularité de la personne avec qui il parle
+        this.setPopularite((float) (autreHumain.getPopularite()*0.01));
+        
+        return SimulateurZytho.selectionAleatoire("phrases");
+    }
+    
+    /**
+     * METHODE BOIRE
+     * =============
+     * Cette méthode permet à un humain de boire un verre 
+     * 
+     * Un client peut boire de l'alcool, la fonction aura un overright
+     * @See Client.boire
+     * 
+     * ENTREES
+     * =======
+     * Aucune entrée
+     * 
+     * SORTIES
+     * =======
+     * Aucune sortie
+     * 
+     * INFORMATIONS
+     * ============
+     * @since 1.0
+     */
+    public void boire(){
+        new Log(this.getPrenom() + "A bu un verre d'eau"); 
+    }
+    
+    /**
+     * METHODE SE_PRESENTER
+     * ====================
+     * Cette méthode permet à un humain de se présenter à quelqu'un d'autre
+     * 
+     * ENTREES
+     * =======
+     * @param autreHumain 
+     *          La personne à qui le personnage se présente
+     * 
+     * SORTIES
+     * =======
+     * @return La phrase de présentation
+     * 
+     * INFORMATIONS
+     * ============
+     * @since 1.0
+     */
+    public String sePresenter(Humain autreHumain){
+        return "Salut " + autreHumain.getPrenom() + " ! Je m'appelle " + this.prenom + ".";
+    }
     
     
 }

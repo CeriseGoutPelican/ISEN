@@ -7,10 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import simulateurzytho.Humain.Barman;
-import simulateurzytho.Humain.Client.Client;
 import simulateurzytho.Humain.Client.Patron;
 import simulateurzytho.Humain.Fournisseur;
-import simulateurzytho.Humain.Serveur.Serveur;
 import simulateurzytho.Humain.Serveur.ServeurFemme;
 import simulateurzytho.Humain.Serveur.ServeurHomme;
 
@@ -36,67 +34,67 @@ public class SimulateurZytho {
     /**
      * Génération de l'interface d'accueil
      */
-    private static Interface ACCUEIL;
+    private static Interface accueil;
     
     /**
      * Génération de l'interface de gestion des stocks
      */
-    private static Interface STOCKS;
+    private static Interface stocks;
     
     /**
      * Génération de l'interface de renouvelement des stocks d'une bouteille existante
      */
-    private static Interface RENOUVELER;  
+    private static Interface renouveler;  
     
     /**
      * Génération de l'interface qui liste l'intégralité des commandes
      */
-    private static Interface COMMANDES; 
+    private static Interface commandes; 
     
     /**
      * Génération de l'interface qui liste l'intégralité des commandes
      */
-    private static Interface LIVRAISON_COMMANDE;  
+    private static Interface livraison_commande;  
     
     /**
      * Génération de l'interface qui liste l'intégralité des commandes
      */
-    private static Interface PAYEMENT_COMMANDE;  
+    private static Interface payement_commande;  
     
     /**
      * Génération de l'interface de la gestion des comptes en banque
      */
-    private static Interface COMPTES;
+    private static Interface comptes;
     
     /**
      * Génération de l'interface de la gestion du personnel (barman, serveur, patron)
      */
-    private static Interface PERSONNEL;
+    private static Interface personnel;
     
     /**
      * Génération de l'interface contenant la liste des clients et de sa gestion
      */
-    private static Interface CLIENTS;
+    private static Interface clients;
     
     /**
      * Génération de l'interface de génération aléatoire de personnages
      */
-    private static Interface GENERATION_PERSO;
+    private static Interface generation_perso;
     
     /**
      * Génération de l'interface de création d'un personnage
      */
-    private static Interface CREATION_PERSO;
+    private static Interface creation_perso;
     
     /**
      * Ferme le programme
      */
-    private static Interface EXIT;
+    private static Interface exit;
     
     /**
      * Interface d'erreyr
      */
-    public static Interface ERROR;
+    public static Interface erreur;
     
     /**
      * Liste de toutes les boissons à la carte
@@ -168,7 +166,7 @@ public class SimulateurZytho {
         generationStaff();
         
         // Affichage de l'écran d'accueil
-        AffichageGraphique.affichageInterface(ACCUEIL, null);
+        AffichageGraphique.affichageInterface(accueil, null);
         
     }
     
@@ -191,32 +189,32 @@ public class SimulateurZytho {
      * @since 1.0
      */
     public static void makeInterface(){
-        ACCUEIL            = new Interface("Accueil du Zytho", "accueil", "Accueil", "planZytho", null, null, null);
-        STOCKS             = new Interface("Affichage des stocks", "stocks", "Stocks", null, "affichageStocks", ACCUEIL, null);
-        RENOUVELER         = new Interface("Renouveler le stock d'une bouteille", "renouveler", "Renouveler le stock", null, "renouvelerStocks", STOCKS, null);
-        COMMANDES          = new Interface("Liste des commandes", "commandes", "Liste des commandes", null, "affichageCommandes", STOCKS, null);
-        LIVRAISON_COMMANDE = new Interface("Livraison d'une commande", "livraison", "Livraison", null, "livraisonCommande", COMMANDES, null);
-        PAYEMENT_COMMANDE  = new Interface("Payement d'une commande", "payement", "Payement", null, "payementCommande", COMMANDES, null);
-        COMPTES            = new Interface("Affichage du compte en banque", "comptes", "Comptes", null, null, ACCUEIL, null);
-        PERSONNEL          = new Interface("Gestion du personnel", "personnel", "Liste du personnel", null, "affichagePersonnel", ACCUEIL, null);
-        CLIENTS            = new Interface("Gestion des clients", "clients", "Liste des clients", null, "affichageClients", ACCUEIL, null);
-        GENERATION_PERSO   = new Interface("Génération aléatoire d'un personnage", "generationPerso", "Génération de personnages", null, "generationPersonnages", ACCUEIL, null);
-        CREATION_PERSO     = new Interface("Création d'un personnage", "creationPerso", "Création de personnages", null, "creationPersonnage", ACCUEIL, null);
-        EXIT               = new Interface("Fermeture", "exit", "Fermer", null, "fermerProgramme", null, null);
-        ERROR              = new Interface("Erreur !", "exit", "Fermer", null, "erreur", null, null);
+        accueil            = new Interface("Accueil du Zytho", "accueil", "Accueil", "planZytho", null, null, null);
+        stocks             = new Interface("Affichage des stocks", "stocks", "Stocks", null, "affichageStocks", accueil, null);
+        renouveler         = new Interface("Renouveler le stock d'une bouteille", "renouveler", "Renouveler le stock", null, "renouvelerStocks", stocks, null);
+        commandes          = new Interface("Liste des commandes", "commandes", "Liste des commandes", null, "affichageCommandes", stocks, null);
+        livraison_commande = new Interface("Livraison d'une commande", "livraison", "Livraison", null, "livraisonCommande", commandes, null);
+        payement_commande  = new Interface("Payement d'une commande", "payement", "Payement", null, "payementCommande", commandes, null);
+        comptes            = new Interface("Affichage du compte en banque", "comptes", "Comptes", null, null, accueil, null);
+        personnel          = new Interface("Gestion du personnel", "personnel", "Liste du personnel", null, "affichagePersonnel", accueil, null);
+        clients            = new Interface("Gestion des clients", "clients", "Liste des clients", null, "affichageClients", accueil, null);
+        generation_perso   = new Interface("Génération aléatoire d'un personnage", "generationPerso", "Génération de personnages", null, "generationPersonnages", accueil, null);
+        creation_perso     = new Interface("Création d'un personnage", "creationPerso", "Création de personnages", null, "creationPersonnage", accueil, null);
+        exit               = new Interface("Fermeture", "exit", "Fermer", null, "fermerProgramme", null, null);
+        erreur             = new Interface("Erreur !", "exit", "Fermer", null, "erreur", null, null);
         
-        ACCUEIL.setEnfants(new Interface[]{STOCKS, COMPTES, PERSONNEL, CLIENTS, EXIT});
-        STOCKS.setEnfants(new Interface[]{ACCUEIL, RENOUVELER, COMMANDES, EXIT});
-        RENOUVELER.setEnfants(new Interface[]{STOCKS, COMMANDES, EXIT});
-        COMMANDES.setEnfants(new Interface[]{STOCKS, PAYEMENT_COMMANDE, LIVRAISON_COMMANDE, EXIT});
-        LIVRAISON_COMMANDE.setEnfants(new Interface[]{COMMANDES, STOCKS, EXIT});
-        PAYEMENT_COMMANDE.setEnfants(new Interface[]{COMMANDES, STOCKS, EXIT});
-        COMPTES.setEnfants(new Interface[]{ACCUEIL, EXIT});
-        PERSONNEL.setEnfants(new Interface[]{ACCUEIL, GENERATION_PERSO, CREATION_PERSO, EXIT});
-        CLIENTS.setEnfants(new Interface[]{ACCUEIL, GENERATION_PERSO, CREATION_PERSO, EXIT});
-        GENERATION_PERSO.setEnfants(new Interface[]{CLIENTS, PERSONNEL, EXIT});
-        CREATION_PERSO.setEnfants(new Interface[]{CLIENTS, PERSONNEL, EXIT});
-        ERROR.setEnfants(new Interface[]{ACCUEIL, EXIT});
+        accueil.setEnfants(new Interface[]{stocks, comptes, personnel, clients, exit});
+        stocks.setEnfants(new Interface[]{accueil, renouveler, commandes, exit});
+        renouveler.setEnfants(new Interface[]{stocks, commandes, exit});
+        commandes.setEnfants(new Interface[]{stocks, payement_commande, livraison_commande, exit});
+        livraison_commande.setEnfants(new Interface[]{commandes, stocks, exit});
+        payement_commande.setEnfants(new Interface[]{commandes, stocks, exit});
+        comptes.setEnfants(new Interface[]{accueil, exit});
+        personnel.setEnfants(new Interface[]{accueil, generation_perso, creation_perso, exit});
+        clients.setEnfants(new Interface[]{accueil, generation_perso, creation_perso, exit});
+        generation_perso.setEnfants(new Interface[]{clients, personnel, exit});
+        creation_perso.setEnfants(new Interface[]{clients, personnel, exit});
+        erreur.setEnfants(new Interface[]{accueil, exit});
     } 
     
     /**
