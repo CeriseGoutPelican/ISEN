@@ -34,6 +34,11 @@ public class SimulateurZytho {
     /**
      * Génération de l'interface d'accueil
      */
+    public static Bar bar;
+    
+    /**
+     * Génération de l'interface d'accueil
+     */
     private static Interface accueil;
     
     /**
@@ -130,11 +135,6 @@ public class SimulateurZytho {
      * Liste de toutes les commandes
      */
     public static List<Commande> listeCommandes = new ArrayList<>();
-    
-    /**
-     * Liquidités disponibles
-     */
-    private static float liquidites = 300;
         
     /**
      * METHODE MAIN
@@ -155,6 +155,9 @@ public class SimulateurZytho {
      * @since 1.0
      */
     public static void main(String[] args) {
+        
+        // Création du bar
+        bar = new Bar("Zytho", 300);
         
         // Génération des interfaces
         makeInterface();
@@ -189,7 +192,7 @@ public class SimulateurZytho {
      * @since 1.0
      */
     public static void makeInterface(){
-        accueil            = new Interface("Accueil du Zytho", "accueil", "Accueil", "planZytho", null, null, null);
+        accueil            = new Interface("Accueil : " + bar.getNom(), "accueil", "Accueil", "planZytho", null, null, null);
         stocks             = new Interface("Affichage des stocks", "stocks", "Stocks", null, "affichageStocks", accueil, null);
         renouveler         = new Interface("Renouveler le stock d'une bouteille", "renouveler", "Renouveler le stock", null, "renouvelerStocks", stocks, null);
         commandes          = new Interface("Liste des commandes", "commandes", "Liste des commandes", null, "affichageCommandes", stocks, null);
@@ -315,56 +318,13 @@ public class SimulateurZytho {
         
         float[] statistiques = {
             0,                                  // Argent caisse
-            liquidites,                         // Argent disponible
+            bar.getLiquidites(),                // Argent disponible
             listeClients.size(),                // Nombre de clients
             listeServeurs.size(),               // Nombre de serveurs
             Boisson.getQuantiteStocks()};       // Stocks
         
         return statistiques;
-    }
-        
-    /**
-     * METHODE GET_LIQUIDITES
-     * ======================
-     * Cette méthode permet de récupérer les liquidités totales du Zytho
-     * 
-     * ENTREES
-     * =======
-     * Aucune entrée
-     * 
-     * SORTIES
-     * =======
-     * @return l'argent disponible sur les comptes
-     * 
-     * INFORMATIONS
-     * ============
-     * @since 1.0
-     */
-    public static float getLiquidites() {  
-        return liquidites;
-    }    
-    
-    /**
-     * METHODE SET_LIQUIDITES
-     * ======================
-     * Cette méthode permet de modifier les liquidites totales du Zytho
-     * 
-     * ENTREES
-     * =======
-     * @param modification 
-     *          Nombre positif et négatif qui sera ajouté au montant des liquidités
-     * 
-     * SORTIES
-     * =======
-     * Aucune sortie 
-     * 
-     * INFORMATIONS
-     * ============
-     * @since 1.0
-     */
-    public static void setLiquidites(float modification) {  
-        liquidites += modification;
-    }
+    } 
     
     /**
      * METHODE SELECTION_ALEATOIRE

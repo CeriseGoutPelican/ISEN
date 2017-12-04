@@ -554,6 +554,8 @@ public class Humain {
         // Le personnage gagne 1% de la popularité de la personne avec qui il parle
         this.setPopularite((float) (autreHumain.getPopularite()*0.01));
         
+        new Log(this.getPrenom() + " parle à " + autreHumain.getPrenom()); 
+        
         return SimulateurZytho.selectionAleatoire("phrases");
     }
     
@@ -600,6 +602,9 @@ public class Humain {
      * @since 1.0
      */
     public String sePresenter(Humain autreHumain){
+        
+        new Log(this.getPrenom() + " se présente à " + autreHumain.getPrenom()); 
+        
         return "Salut " + autreHumain.getPrenom() + " ! Je m'appelle " + this.prenom + ".";
     }
     

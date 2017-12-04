@@ -2,6 +2,8 @@ package simulateurzytho.Humain;
 
 import java.util.List;
 import simulateurzytho.Boisson;
+import simulateurzytho.Humain.Client.Client;
+import simulateurzytho.Humain.Serveur.Serveur;
 
 /**
  * CLASSE BARMAN
@@ -99,6 +101,55 @@ public class Barman extends Humain{
      * @since 1.0
      */
     public void passerCommande(Fournisseur fournisseur, Boisson boisson, int quantite){
+        
+    }
+    
+    /**
+     * METHODE RECEVOIR_ARGENT
+     * =======================
+     * Le Barman est le seul pouvant recevoir l'argent d'un client ou d'un serveur
+     * 
+     * ENTREES
+     * =======
+     * @param client 
+     *          Client qui lui donne de l'argent
+     * @param  argent
+     *          L'argent donné par le client
+     * 
+     * SORTIES
+     * =======
+     * Aucune sortie
+     * 
+     * INFORMATIONS
+     * ============
+     * @since 1.0
+     */
+    public void recevoirArgent(Client client, int argent){
+        
+    }    
+    
+    /**
+     * METHODE RECEVOIR_ARGENT
+     * =======================
+     * Le Barman est le seul pouvant recevoir l'argent d'un client ou d'un serveur
+     * Overload de la fonction précédent (qui utilise client)
+     * 
+     * ENTREES
+     * =======
+     * @param serveur 
+     *          Serveur qui lui donne de l'argent
+     * @param  argent
+     *          Serveur donné par le client
+     * 
+     * SORTIES
+     * =======
+     * Aucune sortie
+     * 
+     * INFORMATIONS
+     * ============
+     * @since 1.0
+     */
+    public void recevoirArgent(Serveur serveur, int argent){
         
     }
     
