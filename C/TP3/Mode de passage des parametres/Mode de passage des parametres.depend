@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1477478378 source:d:\etudes\isen\troisième année\2- informatique\language c\autres tests\mode de passage des parametres\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"../../TP2/TP documentation/src/seatest.h"
+	"../../TP2/TP documentation/src/seatest.c"
+	"header.h"
+
+1475277126 d:\etudes\isen\troisième année\2- informatique\language c\tp2\tp documentation\src\seatest.h
+	<stdio.h>
+	<setjmp.h>
+
+1475277126 d:\etudes\isen\troisième année\2- informatique\language c\tp2\tp documentation\src\seatest.c
+	"seatest.h"
+	<string.h>
+	"windows.h"
+	<strings.h>
+
+1477477922 d:\etudes\isen\troisième année\2- informatique\language c\autres tests\mode de passage des parametres\header.h
+
+1477475088 source:d:\etudes\isen\troisième année\2- informatique\language c\tp3\mode de passage des parametres\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"../../TP2/TP documentation/src/seatest.h"
+	"../../TP2/TP documentation/src/seatest.c"
+	"header.h"
+
+1477474322 d:\etudes\isen\troisième année\2- informatique\language c\tp3\mode de passage des parametres\header.h
+
