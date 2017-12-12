@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1476869910 source:d:\etudes\isen\troisième année\2- informatique\language c\tp2\2eme partie\main.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	"../TP documentation/src/seatest.c"
+	"../TP documentation/src/seatest.h"
+
+1475280726 d:\etudes\isen\troisième année\2- informatique\language c\tp2\tp documentation\src\seatest.c
+	"seatest.h"
+	<string.h>
+	"windows.h"
+	<strings.h>
+
+1475280726 d:\etudes\isen\troisième année\2- informatique\language c\tp2\tp documentation\src\seatest.h
+	<stdio.h>
+	<setjmp.h>
+

@@ -1,0 +1,12 @@
+TP2 : Chaines de caractères et tests unitaires
+==============================================
+
+1ère partie
+-----------
+
+La fonction "test_assert_fails" ne renvoie pas de tests concluants ce qui est normal car celle-ci est 
+constituée de deux tests conditionnels if faux (1==2 et 3==5).
+
+2ème partie
+-----------
+
