@@ -1,0 +1,24 @@
+TP1 : Mise en oeuvre CodeBlocks
+===============================
+
+1ère partie
+-----------
+
+Voir le programme dans TP1/1ère partie
+
+2ème partie
+-----------
+
+- La directive "include" permet d'inclure un fichier dans un autre afin d'éviter d'écrire à plusieurs reprises les mêmes instructions.
+  La directive include permet également d'importer les bibliothèques.
+- Le fichier "limits.h" contient les différentes propriétés des types de variables comme les valeurs limites de int, char, float, etc.
+- Le debuggage permet de repérer les erreurs du programme et des les corriger.
+
+- printEnv() renvoit le numéro de la variable d'environnement machine dans leur ordre d'apparition puis leur nom et localisation
+  => "Variable # 01 est : ALLUSERSPROFILE=C:\ProgramData"...
+- printDynamicOfAllCTypes() permet d'afficher les maximums et les minimums de diffétents types de variables (a été complété)
+- computeFactoriel() permet de retourner la factorielle d'un nombre. N'est pas appelé dans le main (ONE_ARG du switch)
+- Float2Hex() permet de transformer un flotant en base 10 en un flotant en base 16 (hex) et d'afficher le résultat
+- PGCD() retourne le plus grand diviseur commun entre deux nombres spécifiés
+- mypow() renvoit a à la puissance b (erreur dans le programe, < pour le while au lieu de <=)
+

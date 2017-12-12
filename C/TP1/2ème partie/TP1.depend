@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1475056556 source:d:\etudes\isen\troisième année\2- informatique\language c\tp1\2ème partie\isen.2016-17.tp1-csamplefunction.c
+	<stdio.h>
+	<stdlib.h>
+	<limits.h>
+	<float.h>
+	<string.h>
+
+1475048540 source:d:\etudes\isen\troisième année\2- informatique\language c\tp1\2ème partie\isen.2016-17.tp1-csamplemain.c
+	<stdio.h>
+	<stdlib.h>
+	<limits.h>
+	<float.h>
+	"ISEN.2016-17.TP1-CSample.h"
+
+1475048540 d:\etudes\isen\troisième année\2- informatique\language c\tp1\2ème partie\isen.2016-17.tp1-csample.h
+

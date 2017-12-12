@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1475661991 source:d:\etudes\isen\troisième année\2- informatique\language c\tp1\3ème partie\main.c
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+
