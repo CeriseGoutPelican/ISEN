@@ -1,0 +1,118 @@
+
+body {
+    margin: 0px;
+}
+
+header
+{
+    text-align: center;
+    width:100%;
+    margin-top: 0px;
+    margin-left: 0px;
+    padding-bottom: 5px;
+    background-color: white;
+}
+
+.specialOffer *
+{
+    display: block;
+}
+html
+{
+    background-color: cornflowerblue;
+}
+footer
+{
+
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    text-align: center;
+    width:100%;
+    margin-left: 0px;
+    display: inline-block;
+    vertical-align: bottom;
+    background-color: red;
+    height: 50px;
+
+}
+
+.footerTampon{
+    height: 50px;
+}
+
+footer a
+{
+    color: green;
+    text-decoration:none;
+    vertical-align: center;
+}
+footer div
+{
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+    line-height: 50%;
+}
+
+
+#headertitle {
+    font-size: 70px;
+    color: blue;
+    text-decoration:none;
+}
+
+.basket {
+    position:fixed;
+    right: 20px;
+    top: 100px;
+    height: 200px;
+    width : 300px;
+    background-color: green;
+    border-radius: 20px;
+
+}
+
+
+.basket table{
+    width: 100%;
+    text-align: center;
+}
+
+
+nav
+{
+    display: inline-block;
+    width: 15%;
+    vertical-align: top;
+    background-color: aliceblue;
+    margin-left:0px;
+    padding-left: 4px;
+}
+section
+{
+
+    width: 55%
+}
+
+#buy
+{
+
+}
+
+section
+{
+    display: inline-block;
+    vertical-align: top;
+
+}
+
+nav a
+{
+display: block;
+}
+
+.navtitle
+{
+    font-weight: bold;
+}

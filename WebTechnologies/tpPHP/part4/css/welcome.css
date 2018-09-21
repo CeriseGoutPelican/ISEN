@@ -1,0 +1,21 @@
+
+#welcomeMainImage
+{
+    display:block;
+    margin: auto;
+    width:600px;
+}
+
+.innerwelcomePage
+{
+    text-align: center;
+    margin:auto;
+}
+
+#titleWelcome
+{
+    font-size: 120px;
+    color: blue;
+    text-decoration:none;
+}
+

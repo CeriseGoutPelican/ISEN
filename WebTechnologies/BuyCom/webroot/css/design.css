@@ -1,0 +1,619 @@
+/********************************
+
+	STRUCTURE PRINCIPALE
+
+ ********************************/
+
+/*** IMPORTATIONS ***************/
+
+@import url('https://fonts.googleapis.com/css?family=Karla');
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+
+/*** GENERAL ********************/
+
+.clear{
+	clear: both;
+	height: 1em;
+}
+
+.separation{
+	width: 100%;
+	height: 0px;
+	margin: 10px 0;
+
+	border-bottom: 1px solid #CCC;
+}
+
+.button{
+	padding: 8px 15px; 
+
+	border-radius: 4px;
+	color: white;
+	background-color: #358532;
+}
+.button:hover{
+	color: white;
+	cursor: pointer;
+	background-color: #44A53E;
+}
+
+.state1{
+	color: #358532;
+}
+.state2{
+	color: #E27231;
+}
+.state3{
+	color: #BC4545;
+}
+
+/*** PAGE ***********************/
+
+body{
+	max-width: 1000px;
+	margin: 90px auto 20px auto;
+
+    font-family: 'Karla', Arial, sans-serif;
+}
+
+a{
+	color: #BE5757;
+	text-decoration: none;
+}
+
+a:hover{
+	color: #E08B8B;
+}
+
+/*** HEADER *********************/
+
+header{
+
+}
+
+header #title{
+	float: left;
+}
+
+/*** PROMO SECTION **************/
+
+header #promo{
+	width: 100%;
+	height: 20px;
+	padding: 10px 0; 
+	position: fixed;
+	top: 0; left: 0;
+
+	color: white;
+	background-color: #358532;
+	border-bottom: 1px solid #327A2E;
+}
+
+header #promo .centered{
+	position: relative;
+	max-width: 1000px;
+	margin: auto;
+}
+
+header #promo a{
+	color: white;
+}
+header #promo a:hover{
+	text-decoration: underline;
+}
+
+header #promo .promoMessage{
+	float: left;
+}
+
+header #promo .userArea{
+	float: right;
+}
+
+header #promo .userArea a{
+	text-decoration: underline;
+}
+
+header #promo .userArea a:hover{
+	text-decoration: none;
+}
+
+header #promo .userArea a.logout{
+	display: inline-block;
+	margin-left: 10px;
+}
+
+header .cart a{
+	position: relative;
+	float: right;
+	margin: 0 5px 0 15px;
+
+	font-size: 18px;
+}
+
+header .cart a .nbItems{
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	display: inline-block;
+	top: -8px; right: -15px;
+
+	font-size: 16px;
+	border-radius: 10px;
+	text-align: center;
+	background-color: #8E4747;
+}
+
+header .cart a:hover{
+	color: #CECECE;
+	text-decoration: none;
+}
+
+header .search{
+	position: relative;
+}
+
+header .search input[type=text]{
+	width: 200px;
+	float: right;
+	margin: -4px 0 0 20px;
+	padding: 6px;
+
+	border-radius: 2px;
+	border: none;
+	font-size: 13px;
+}
+
+header .search button{
+	position: absolute;
+	top: -14px; right: 23px;
+	float: right;
+	padding: 6px 10px;
+	margin-top: 8px;
+	margin-right: 16px;
+	
+	color: #CCC;
+	background: unset;
+	font-size: 17px;
+	border: none;
+	cursor: pointer;
+}
+header .search button:hover{
+	color: #111;
+}
+
+/*** NAVIGATION *****************/
+
+header nav{
+	float: right;
+}
+
+header nav ul{
+
+}
+
+header nav ul>li{
+	display: block;
+	float: left;
+}
+
+header nav ul>li a{
+	display: inline-block;
+	margin-top: 0px;
+	padding: 10px 20px;
+
+	font-size: 19px;
+	text-transform: capitalize;
+}
+
+header nav ul>li a:hover{
+
+}
+
+/*** CAROUSEL *******************/
+
+section.carousel{
+	margin: 30px 0;
+}
+
+/********************************
+
+	PAGE D'ACCUEIL
+
+ ********************************/
+
+section.welcome{
+	text-align: center;
+}
+
+section.welcome h1{
+	margin-bottom: 10px;	
+
+	font-size: 50px;
+	font-weight: normal;
+	font-family: 'Amatic SC', cursive;
+}
+
+/********************************
+
+	BOUTIQUE
+	Liste des produits
+
+ ********************************/
+
+section.shoppingList .product{
+	display: block;
+	width: 300px;
+	margin: 16.6px;
+	float: left;
+	overflow: hidden;
+
+	text-align: center;
+	transition: all .3s;
+}
+
+section.shoppingList .product .img{
+	width: 300px;
+	height: 300px;
+	margin-bottom: 10px;
+
+	background-position: center center;
+	background-size: cover;
+	border-radius: 2px;
+}
+section.shoppingList .product:hover{
+	transform: scale(1.06);
+	transition: all .3s;
+}
+
+section.shoppingList .product .title{
+	display: block;
+
+	color: black;
+	font-weight: bold;
+}
+
+section.shoppingList .product .price{
+	margin-top: 5px;
+	display: block;
+}
+
+/********************************
+
+	BOUTIQUE
+	Affichage d'un article
+
+ ********************************/
+
+.item{
+	margin-top: 15px;
+}
+
+.item h1{
+	margin: -10px 0 0 0;
+
+	font-size: 35px;
+}
+
+.item .images{
+	width: 390px;
+	height: 300px;
+
+	float: left;
+}
+
+.item .images .thumbnails{
+	float: left;
+}
+
+.item .images .thumbnails .thumbs{
+	width: 75px;
+	height: 75px;
+	margin: 0 15px 15px 0;
+
+	background-color: #E5E5E5;	
+	cursor: pointer;
+	background-position: center center;
+	background-size: cover;
+	transition: all .3s;
+	border-radius: 2px;
+}
+
+.item .images .image{
+	float: right;
+	width: 300px;
+	height: 300px;
+
+	background-color: #E5E5E5;
+	cursor: pointer;
+	background-position: center center;
+	background-size: cover;
+	transition: all .3s;
+	border-radius: 2px;
+}
+.item .images .image:hover{
+	transform: scale(1.4);
+	transition: all .3s;
+}
+.item .images .thumbnails .thumbs:hover{
+	transform: scale(1.06);
+	transition: all .3s;
+}
+
+.item .description{
+	width: calc(1000px - 390px - 25px);
+	margin-left: 25px;
+	float: left;
+}
+
+.item .description .price{
+	display: inline;
+	color: #BE5757;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.item .description .stock{
+	display: inline;
+}
+
+.addToCart{
+	display: inline-block;
+	float: right;
+}
+
+/********************************
+
+	PANIER DE COURSES
+
+ ********************************/
+
+.shoppingCart h1{
+	margin: 20px 0 20px 0;
+
+	font-size: 35px;
+}
+
+.shoppingCart .product{
+	color: black;
+}
+
+.shoppingCart .product .img{
+	float: left;
+	width: 100px;
+	height: 100px;
+	margin: 0 10px 10px 0;
+
+	background-color: #E5E5E5;
+	border-radius: 2px;
+	background-position: center center;
+	background-size: cover;
+}
+
+.shoppingCart .product .title a{
+	font-size: 25px;
+	color: black;
+}
+
+.shoppingCart .product .infos{
+	float: left;
+	width: 500px;
+	margin: 0 10px 10px 0;
+}
+
+.shoppingCart .product .price{
+	float: left;
+	width: 100px;
+	margin: 0 10px 10px 0;
+
+	font-size: 20px;
+}
+
+.shoppingCart .product .quantity{
+	float: left;
+	width: 100px;
+	margin: 0 10px 10px 0;
+
+	text-align: center;
+}
+
+.shoppingCart .outofstock{
+	opacity: 0.3;
+}
+
+.shoppingCart .firstRow .img,
+.shoppingCart .firstRow .title,
+.shoppingCart .firstRow .infos,
+.shoppingCart .firstRow .price,
+.shoppingCart .firstRow .quantity{
+	font-size: 12px;
+	color: #808080;
+}
+.shoppingCart .firstRow .img{
+	height: 0px;
+}
+
+.button.payment{
+	display: inline-block;
+	margin: 20px 0;
+
+	float: right;
+
+	font-size: 22px;
+}
+
+/********************************
+
+	CONNXION / INSCRIPTION
+
+ ********************************/
+
+section.login .error,
+section.signup .error{
+	color: #B85C5C;
+	font-weight: bold;
+	margin-bottom: 30px;
+}
+
+section.login,
+section.signup{
+	float: left;
+	width: calc(50% - 24px);
+	margin: 10px;
+	border-radius: 3px;
+	overflow: hidden;
+}
+
+section.login .title,
+section.signup .title{
+	display: block;
+	width: calc(100% - 60px);
+	height: 90px;
+	padding: 30px 30px 20px 30px;
+
+	color: white;
+	background-color: #358532;
+}
+
+section.signup .title{
+	background-color: #B85C5C;
+}
+
+section.login .title h1,
+section.signup .title h1{
+	font-size: 30px;
+	margin: 0 0 10px 0;
+}
+
+section.login form,
+section.signup form{
+	padding: 30px;
+}
+
+input[type=text], input[type=email], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0 16px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+section.login form button,
+section.signup form button{
+    background-color: #358532;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+section.signup form button{
+    background-color: #B85C5C;
+}
+
+section.login form button:hover,
+section.signup form button:hover{
+    opacity: 0.8;
+}
+
+section.login{
+	border: 1px solid #358532;
+}
+
+section.signup{
+	border: 1px solid #B85C5C;
+}
+
+section.login .forgotPassword{
+	text-align: right;
+	font-size: small;
+}
+
+section.login .forgotPassword a{
+	color: #358532;
+}
+
+
+/********************************
+
+	GESTION DES ADDRESSES
+
+ ********************************/
+
+.addresses h1{
+	margin-bottom: 25px;
+}
+
+.addresses .address{
+	width: 600px;
+	padding: 10px 15px;
+	margin: 10px auto;
+
+	border: 1px solid #D3D3D3;
+	background-color: #EAEAEA;
+	border-radius: 4px;
+}
+
+.addresses .address .name{
+	font-weight: bold;
+	font-size: 25px;
+	padding-bottom: 3px;
+}
+
+.addresses .address .description{
+	color: #969696;
+	font-size: 17px;
+}
+
+.addresses .address .options{
+	float: right;
+	margin-top: 3px;
+
+	font-size: 20px;
+}
+
+.addresses .newAdress{
+	float: right;
+}
+
+.addresses .button.payment{
+	margin-top: 25px;
+}
+
+
+/********************************
+
+	FOOTER
+
+ ********************************/
+
+footer{
+	padding: 40px 0 40px 0;
+}
+
+footer, footer a{
+	color: #878787;
+}
+
+footer a:hover{
+	color: #353535;
+}
+
+footer ul{
+	margin: 0;
+	padding: 0;
+}
+
+footer ul>li{
+	display: block;
+	float: left;
+	margin: 0; 
+}
+
+footer ul>li a:after{
+	margin: 0 10px;
+	content: "•";
+}
