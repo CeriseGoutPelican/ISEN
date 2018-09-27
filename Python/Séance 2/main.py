@@ -17,11 +17,11 @@ def readPath(folders):
     for root, dirs, files in folders:
         # Fichiers
         for name in files:
-            info = os.stat(os.path.join(root, name)).st_mtime, os.path.join(root, name)
+            info = os.path.join(root, name), os.stat(os.path.join(root, name)).st_mtime
             paths.append(info)
         # Dossiers
         for name in dirs:
-            info = os.stat(os.path.join(root, name)).st_mtime, os.path.join(root, name)
+            info = os.path.join(root, name), os.stat(os.path.join(root, name)).st_mtime
             paths.append(info)
 
     return paths
@@ -48,40 +48,42 @@ def readList(fileName):
         return pickle.load(f)
 
 def comparaison(liste1 = [], liste2 = []):
-    liste1_path = list2To1(liste1, 1)
-    liste2_path = list2To1(liste2, 1)
+    """
+    Permet de récupérer les éléments modifiés et supprimés sur une liste de tuples
 
-    deleted = set(liste1_path).difference(liste2_path)
-    added = set(liste2_path).difference(liste1_path)
+    :param liste1:
+    :param liste2:
+    :return: liste 2D des éléments ajoutés , liste 2D dés éléments supprimés
+    """
+    sListe1 = set(liste1)
+    sListe2 = set(liste2)
 
-    #liste_intersection = intersection(liste1, liste2)
-
-    #displayList(liste_intersection)
+    added = sListe2 - sListe1
+    deleted = sListe1 - sListe2
 
     return added, deleted
 
-def list2To1(liste, index):
-    finalList = []
-    for e in liste:
-        finalList.append(e[index])
+def editedFiles(added, deleted):
+    """
+    Permet de récupérer une liste uniquement avec les modifications
 
-    return finalList
+    :param added:
+    :param deleted:
+    :return:
+    """
 
-def intersection(liste1, liste2):
+    # 1. Récupération des index de suppression
+    deletedPaths = []
+    for e in deleted:
+        deletedPaths.append(e[0])
 
-    if len(liste1) < len(liste2):
-        liste1, liste2 = liste2, liste1
+    # 2. Comparaison des éléments
+    edited = []
+    for e in added:
+        if e[0] in deletedPaths:
+            edited.append(e)
 
-    liste3 = []
-
-    for i in range(len(liste1)):
-        print('>'+str(i))
-        print(liste1[0][0])
-        if liste1[i][1] == liste2[i][1]:
-            liste3.append(liste1[1])
-
-    # [value for value in liste1 if value in liste2]
-    return liste3
+    return edited
 
 def displayList(liste):
     """
@@ -96,24 +98,15 @@ def displayList(liste):
         for e in liste:
             print(e)
 
-def newLog(list):
+def main(delay, watchingPath):
     """
-    Permet d'adapter une liste à un log facile à lire
-    :param list: liste 2D
-    :return: liste 1D lisible par un utilisateur
+    Fonction principale
+    :param delay: temps en seconde entre chaque vérification
     """
-    print()
 
-def main(delay):
-    """
-    Fonction principale qui permet de monitorer un dossier dans le temps
-
-    :param delay: temps en seconde entre deux analyses du dossier
-    :return: None
-    """
     # 1. Récupération des fichiers actuels
     print("Lecture des fichiers...\n")
-    workingList = readPath("C:/UwAmp/www/comparaison/t1")
+    workingList = readPath(watchingPath)
     displayList(workingList)
 
     # 2. Récupération des fichiers sauvegardés
@@ -121,33 +114,32 @@ def main(delay):
     savedList = readList("savedList.data")
     displayList(savedList)
 
-    # Création d'une liste de logs
-    logs = readList("logs.data")
+    # 3. Sauvegarde de l'état du fichier
+    #saveFile(workingList, "savedList.data")
 
-    time.sleep(delay)
-    main(delay)
+    print("\n"+"-"*60+"\nComparaison des deux ficiers, incluant les metadata...\n")
+
+    added, deleted = comparaison(savedList, workingList)
+
+    edited = editedFiles(added, deleted)
+
+    print("\nFichiers et dossiers rajoutés :")
+    displayList(added)
+
+    print("\nFichiers et dossiers supprimés :")
+    displayList(deleted)
+
+    print("\nFichiers édités : ")
+    displayList(edited)
+
+    added = added.difference(edited)
+    deleted = deleted.difference(edited)
+
+    print("\nFichiers et dossiers rajoutés :")
+    displayList(added)
+
+    print("\nFichiers et dossiers supprimés :")
+    displayList(deleted)
 
 
-# print("\n"+"-"*60+"\nSauvegarde du fichier... "  + str(saveFile(workingList, "savedList.data")))
-
-# 1. Récupération des fichiers actuels
-print("Lecture des fichiers...\n")
-workingList = readPath("C:/UwAmp/www/comparaison/t1")
-displayList(workingList)
-
-# 2. Récupération des fichiers sauvegardés
-print("\n"+"-"*60+"\nLecture du fichier sauvegardé...\n")
-savedList = readList("savedList.data")
-displayList(savedList)
-
-print("\n"+"-"*60+"\nComparaison des deux ficiers, incluant les metadata...\n")
-
-added = []
-deleted = []
-added, deleted = comparaison(savedList, workingList)
-
-print("Fichiers et dossiers rajoutés :")
-displayList(added)
-print("\nFichiers et dossiers supprimés :")
-displayList(deleted)
-
+main(30, "C:/UwAmp/www/comparaison/t1")
