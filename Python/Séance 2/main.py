@@ -1,8 +1,9 @@
 import os
 import pickle
+from datetime import datetime
 import time
 
-def readPath(folders):
+def readPath(folders, depth):
     """
     Permet de récupérer l'intégralité des fichiers et des sous-dossiers d'un dossier
     indiqué par la variable folders
@@ -17,12 +18,24 @@ def readPath(folders):
     for root, dirs, files in folders:
         # Fichiers
         for name in files:
-            info = os.path.join(root, name), os.stat(os.path.join(root, name)).st_mtime
-            paths.append(info)
+
+            print(name)
+            print(name.count(os.sep))
+            print(os.sep)
+
+            if name.count(os.sep) >= depth:
+                info = os.path.join(root, name), os.stat(os.path.join(root, name)).st_mtime
+                paths.append(info)
         # Dossiers
         for name in dirs:
-            info = os.path.join(root, name), os.stat(os.path.join(root, name)).st_mtime
-            paths.append(info)
+
+            print(name)
+            print(name.count(os.sep))
+            print(os.sep)
+            
+            if name.count(os.sep) >= depth:
+                info = os.path.join(root, name), os.stat(os.path.join(root, name)).st_mtime
+                paths.append(info)
 
     return paths
 
@@ -44,8 +57,12 @@ def readList(fileName):
     :param fileName: nom du fichier à lire
     :return: la liste
     """
-    with open(fileName, 'rb') as f:
-        return pickle.load(f)
+    scores = []
+    if os.path.getsize(fileName) > 0:
+        with open(fileName, "rb") as f:
+            unpickler = pickle.Unpickler(f)
+            scores = unpickler.load()
+    return scores
 
 def comparaison(liste1 = [], liste2 = []):
     """
@@ -108,54 +125,78 @@ def displayList(liste):
         for e in liste:
             print(e)
 
-def main(delay, watchingPath):
+def category(liste, categoryName):
+    liste = list(liste)
+    for i in range(len(liste)):
+        liste[i] = list(liste[i])
+        liste[i].append(categoryName)
+    return liste
+
+def intelligibleDate(liste):
+    for i in range(len(liste)):
+        ts = int(liste[i][1])
+        liste[i][1] = datetime.utcfromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+
+    return liste
+
+def saveLogs(logs, file = "logs.data"):
+    # Sauvegarde du fichier logs
+    f = open(file, "a+")
+    for e in logs:
+        f.write("The file '"+e[0]+"' has been " + e[2] + " the " + e[1] + "\n")
+    f.close()
+
+def watch(watchingPath, logsPath, delay = 15, depth = 5, debug = False):
     """
     Fonction principale
     :param delay: temps en seconde entre chaque vérification
     """
 
     # 1. Récupération des fichiers actuels
-    print("Lecture des fichiers...\n")
-    workingList = readPath(watchingPath)
-    displayList(workingList)
+    workingList = readPath(watchingPath, depth)
+
+    if debug:
+        print("-"*60)
+        print("FICHIERS ACTUELS : ")
+        displayList(workingList)
+        print("-"*60)
 
     # 2. Récupération des fichiers sauvegardés
-    print("\n"+"-"*60+"\nLecture du fichier sauvegardé...\n")
     savedList = readList("savedList.data")
-    displayList(savedList)
+
+    if debug:
+        print("-"*60)
+        print("FICHIERS D'IL Y A " + str(delay) + "s : ")
+        displayList(workingList)
+        print("-"*60)
 
     # 3. Sauvegarde de l'état du fichier
-    #saveFile(workingList, "savedList.data")
-
-    print("\n"+"-"*60+"\nComparaison des deux ficiers, incluant les metadata...\n")
+    saveFile(workingList, "savedList.data")
 
     added, deleted = comparaison(savedList, workingList)
-
     edited, oldEdited = editedFiles(added, deleted)
 
-    print("="*100)
-    displayList(edited)
-    print("\n")
-    displayList(oldEdited)
-    print("="*100)
+    # Retraits des valeurs en double + ajout d'un élément de catégorie
+    added = category(added.difference(edited), "added")
+    deleted = category(deleted.difference(oldEdited), "deleted")
+    edited = category(edited, "edited")
 
-    print("\nFichiers et dossiers rajoutés (avant repérage des éditions) :")
-    displayList(added)
+    # Merge + trie par ordre chronologique
+    logs = added + deleted + edited
+    logs = sorted(logs,key=lambda x: x[1])
 
-    print("\nFichiers et dossiers supprimés (avant repérarage des éditions) :")
-    displayList(deleted)
+    # timestamp to date time
+    logs = intelligibleDate(logs)
 
-    print("\nFichiers édités : ")
-    displayList(edited)
+    if debug:
+        print("-"*60)
+        print("LOGS FINAUX : ")
+        displayList(logs)
+        print("-"*60)
+    saveLogs(logs, logsPath)
 
-    added = added.difference(edited)
-    deleted = deleted.difference(oldEdited)
+    print("\nWatching...\n")
+    time.sleep(delay)
+    watch(watchingPath, logsPath, delay, depth, debug)
 
-    print("\nFichiers et dossiers rajoutés :")
-    displayList(added)
-
-    print("\nFichiers et dossiers supprimés :")
-    displayList(deleted)
-
-
-main(30, "C:/UwAmp/www/comparaison/t1")
+watch("C:/UwAmp/www/comparaison/t1", "logs.data", 15, 5, True)
