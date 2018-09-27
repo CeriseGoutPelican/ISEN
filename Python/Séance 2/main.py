@@ -72,18 +72,28 @@ def editedFiles(added, deleted):
     :return:
     """
 
-    # 1. Récupération des index de suppression
+    # 1. Récupération des index de suppression puis des indexes d'ajouts
     deletedPaths = []
     for e in deleted:
         deletedPaths.append(e[0])
 
-    # 2. Comparaison des éléments
+    addedPaths = []
+    for e in added:
+        addedPaths.append(e[0])
+
+    # 2. Comparaison des éléments édités
     edited = []
     for e in added:
         if e[0] in deletedPaths:
             edited.append(e)
 
-    return edited
+    # 3. Comparaison des éléments édités avec ancienne date
+    oldEdited = []
+    for e in deleted:
+        if e[0] in addedPaths:
+            oldEdited.append(e)
+
+    return edited, oldEdited
 
 def displayList(liste):
     """
@@ -121,19 +131,25 @@ def main(delay, watchingPath):
 
     added, deleted = comparaison(savedList, workingList)
 
-    edited = editedFiles(added, deleted)
+    edited, oldEdited = editedFiles(added, deleted)
 
-    print("\nFichiers et dossiers rajoutés :")
+    print("="*100)
+    displayList(edited)
+    print("\n")
+    displayList(oldEdited)
+    print("="*100)
+
+    print("\nFichiers et dossiers rajoutés (avant repérage des éditions) :")
     displayList(added)
 
-    print("\nFichiers et dossiers supprimés :")
+    print("\nFichiers et dossiers supprimés (avant repérarage des éditions) :")
     displayList(deleted)
 
     print("\nFichiers édités : ")
     displayList(edited)
 
     added = added.difference(edited)
-    deleted = deleted.difference(edited)
+    deleted = deleted.difference(oldEdited)
 
     print("\nFichiers et dossiers rajoutés :")
     displayList(added)
