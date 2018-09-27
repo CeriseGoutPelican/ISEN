@@ -5,7 +5,7 @@ import time
 def readPath(folders):
     """
     Permet de récupérer l'intégralité des fichiers et des sous-dossiers d'un dossier
-    indiqué par la variable path
+    indiqué par la variable folders
 
     :param folders: chemin du dossier d'écoute
     :return: liste de tuple avec les fichiers et sous dossier d'un path à instant t
@@ -102,7 +102,7 @@ def newLog(list):
     :param list: liste 2D
     :return: liste 1D lisible par un utilisateur
     """
-    
+    print()
 
 def main(delay):
     """
@@ -130,8 +130,16 @@ def main(delay):
 
 # print("\n"+"-"*60+"\nSauvegarde du fichier... "  + str(saveFile(workingList, "savedList.data")))
 
+# 1. Récupération des fichiers actuels
+print("Lecture des fichiers...\n")
+workingList = readPath("C:/UwAmp/www/comparaison/t1")
+displayList(workingList)
 
-'''
+# 2. Récupération des fichiers sauvegardés
+print("\n"+"-"*60+"\nLecture du fichier sauvegardé...\n")
+savedList = readList("savedList.data")
+displayList(savedList)
+
 print("\n"+"-"*60+"\nComparaison des deux ficiers, incluant les metadata...\n")
 
 added = []
@@ -142,4 +150,4 @@ print("Fichiers et dossiers rajoutés :")
 displayList(added)
 print("\nFichiers et dossiers supprimés :")
 displayList(deleted)
-'''
+
