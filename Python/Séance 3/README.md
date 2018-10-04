@@ -1,6 +1,7 @@
 # Séance 3 : Python
 
 Description de l'ensemble des fichiers présents dans le dossier
+
 | Nom du fichier   | Description du fichier                                                                                      |
 |------------------|-------------------------------------------------------------------------------------------------------------|
 | exo1.py          | Fonction correspondant à l'exercice n°1                                                                     |
