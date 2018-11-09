@@ -20,7 +20,7 @@ def tests_unitaires():
     :return: rien du tout
     """
     test_unitaire(access, (True, True), "local.techno-web.fr", "http",  ("admin", "admin"), 200, "Admin")
-    test_unitaire(access, (True, True), "home447549752.1and1-data.host", "sftp",  ("u71641068", "u74FZsn8"), 200, "Admin")
+    test_unitaire(access, (True, True), "home447549752.1and1-data.host", "sftp",  ("", ""), 200, "Admin")
 
     u71641068
 
