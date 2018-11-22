@@ -2,14 +2,13 @@
 # - Importation des bibliothèques & constantes -
 # ----------------------------------------------
 
-import urllib3
-import ftplib
+from checks import *
 
 # ----------------------------------------------
-# - Fonctions -
+# - Fonctions                                  -
 # ----------------------------------------------
 
-def access(localisation, protocol, account, expectedCode, expectedResult):
+def access(localisation, protocol, account, expectedCode, expectedResult = "", port = 22):
     """
     Permet d'accéder à une machine distante à l'aide de différents protocoles comme HTTP(S), (S)FTP et SSH
 
@@ -26,29 +25,27 @@ def access(localisation, protocol, account, expectedCode, expectedResult):
     # HTTP(S) ------------------------------------------------------------------------------
     if protocol == "http" or protocol == "https":
 
-        # Connexion à la page
-        http = urllib3.PoolManager()
+        status, expectedResult = http_check(localisation, protocol, account, expectedCode, expectedResult, port)
 
-        r = http.request(
-            'POST',
-            protocol+"://"+localisation,
-            fields={"page":"login", "login": account[0], "password": account[1]})
+    # FTP ----------------------------------------------------------------------------------
+    elif protocol == "ftp":
 
-        # Code d'erreur de la page attendu (HTTP status)
-        status = True if r.status == expectedCode else False
+        status, expectedResult = ftp_check(localisation, account, expectedCode, expectedResult, port)
 
-        # On recherche un bout de texte dans le résultat qui confirme la bonne connexion
-        expectedResult = False if str(r.data).find(expectedResult) == - 1 else True
+    # SFTP ---------------------------------------------------------------------------------
+    # Le protocol SFTP est très différent du FTP ou même du FTPS, c'est en réalité du FTP
+    # via un protocole SSH. On utilise la bibliothèque OS independant Paramiko
 
-    # (S)FTP -------------------------------------------------------------------------------
-    elif protocol == "ftp" or protocol == "sftp":
+    elif protocol == "sftp":
 
-
-        status = False
-        expectedResult = False
+        status, expectedResult = sftp_check(localisation, account, expectedCode, expectedResult, port)
 
     # SSH ----------------------------------------------------------------------------------
     elif protocol == "ssh":
+
+        status, expectedResult = ssh_check(localisation, account, expectedCode, expectedResult, port)
+
+    else:
         status = False
         expectedResult = False
 

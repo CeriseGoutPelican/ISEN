@@ -1,0 +1,5 @@
+http://local.techno-web.fr|admin,admin|200|Admin
+http://techno-web.fr|Gregoire.GAONACH,azerty|200|welcome Gregoire
+ftp://ftp.dlptest.com|dlpuser@dlptest.com,e73jzTRTNqCN9PYAAjjn|230|
+sftp://test.rebex.net|demo,password|230|
+ssh://test.rebex.net|demo,password|230|

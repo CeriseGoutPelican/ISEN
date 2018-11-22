@@ -8,4 +8,5 @@ DATE_FMT = '%d/%m/%Y %H:%M:%S'
 logging.basicConfig(level=logging.INFO, format=STR_FMT, datefmt=DATE_FMT)
 logging.info(sys.version)
 
+
 sys.stderr = sys.__stdout__
